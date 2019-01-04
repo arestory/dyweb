@@ -1,0 +1,33 @@
+<html>
+<head>
+<link type="text/css"  rel="stylesheet" href="../css/more.css"/> 
+
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>more</title>
+</head>
+<body>   
+<div id ="app"  >
+<div   v-if="finish">
+    <ol> 
+    <a style="margin-left:50px;text-align: left; display:inline;"  href="javascript:void(0);" v-on:click="back" >返回上一页</a></ul>
+
+    <li class="item-li" v-for="item in items">
+    <a  class="item-content"  href="javascript:void(0);" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
+    </li>
+    <ul > 
+    <a style="margin-left:50px;text-align: left; display:inline;"  href="javascript:void(0);" v-on:click="showNextPage" >点击加载更多</a></ul>
+    </ol>
+</div>
+</div>
+ 
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script> 
+
+<script src="../js/jq.js"></script>
+<script src="../js/more.js"></script>
+</body>
+
+
+
+</html>

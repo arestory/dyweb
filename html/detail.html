@@ -1,0 +1,37 @@
+<html>
+<head>
+<link type="text/css"  rel="stylesheet" href="../css/detail.css"/> 
+<script src="../js/jq.js"></script>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>详情</title>
+</head>
+<body>   
+<div id ="app"  >
+<div  class="cardBox" v-if="finish">
+    <a style="margin-left:50px;text-align: left; display:inline;"  href="javascript:void(0);" v-on:click="back" >返回上一页</a></ul>
+
+     <div >
+        <div class="contentBox"   > 
+            <ol><ul class="content" v-for="item in desc">{{item}}</ul></ol> 
+            <ol>
+            <ul >请复制链接或右键选择迅雷下载</ul>
+             <ul v-for="item in downloadList"><a :href="item">{{item}}</a></ul></ol>
+        </div>   
+    </div>
+
+    <div  style="text-align:left">
+        <div class="box"><img :src="coverImg"/></div> 
+    </div>
+    </div>
+</div>
+ 
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script src="../js/detail.js"></script>
+
+</body>
+
+
+
+</html>
