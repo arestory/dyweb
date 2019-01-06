@@ -62,11 +62,16 @@ var app = new Vue({
 
         },
         back:function(){
-            window.location.href='index.html'; 
+            back()
         }
 
     } 
 }) 
+
+function back(){
+    window.location.href='index.html'; 
+
+}
 function showDetail(name,href){
 
     window.location.href='detail.html';
