@@ -28,8 +28,8 @@ var app = new Vue({
 })
 
 function back(){
-    window.location.href='index.html'; 
-
+    // window.location.href='index.html'; 
+    window.history.go(-1);
 
 }
 

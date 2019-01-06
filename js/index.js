@@ -50,9 +50,9 @@ var appTabRihan = new Vue({
 
            showDetail(title,href)
         },showMoreMovie:function(){
-            showMore('china',"get_movies")
+            showMore('rihan',"get_movies")
         },showMoreTv:function(){ 
-            showMore('china',"get_tvs")
+            showMore('rihan',"get_tvs")
         },
         tvs:[{
             name:"正在加载数据",
@@ -76,9 +76,9 @@ var appTabOumei = new Vue({
 
            showDetail(title,href)
         },showMoreMovie:function(){
-            showMore('china',"get_movies")
+            showMore('oumei',"get_movies")
         },showMoreTv:function(){ 
-            showMore('china',"get_tvs")
+            showMore('oumei',"get_tvs")
         },
         tvs:[{
             name:"正在加载数据",
@@ -102,9 +102,9 @@ var appTabZongyi = new Vue({
 
            showDetail(title,href)
         },showMoreMovie:function(){
-            showMore('china',"get_movies")
+            showMore('zongyi',"get_zhongyi")
         },showMoreTv:function(){ 
-            showMore('china',"get_tvs")
+            showMore('zongyi',"get_zhongyi")
         },
         tvs:[{
             name:"正在加载数据",

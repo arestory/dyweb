@@ -48,8 +48,7 @@ var app = new Vue({
 }) 
 
 function back(){
-    window.location.href=prepage; 
-
+    window.history.go(-1);
 }
 
 function getDetail(href){
