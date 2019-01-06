@@ -1,6 +1,8 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="../css/mdui.min.css" />
+
     <link type="text/css" rel="stylesheet" href="../css/detail.css" />
     <script src="../js/jq.js"></script>
     <meta charset="utf-8">
@@ -9,24 +11,32 @@
 </head>
 
 <body>
-    <div id="app">
-        <a style="margin-left:50px;text-align: left; display:inline;" href="javascript:void(0);" v-on:click="back">返回上一页</a>
-
+    <div class="mdui-appbar" id="bar">
+        <div class="mdui-toolbar mdui-color-indigo">
+            <a   class="mdui-btn mdui-btn-icon" onclick="back()"><i class="mdui-icon material-icons">arrow_back</i></a>
+            <a href="javascript:;" class="mdui-typo-title">{{title}}</a>
+        </div>
+    </div>
+    <div id="app" class="mdui-container">
         <div class="cardBox" v-if="finish">
 
 
             <div style="text-align:left">
-                <div ><img :src="coverImg" class="box"/></div>
+                <div><img :src="coverImg" class="box" /></div>
             </div>
 
             <div>
                 <div class="contentBox">
+                    
+
                     <ol>
-                        <ul class="content" v-for="item in desc">{{item}}</ul>
+                        <ul v-for="item in desc"> <a  class="mdui-list-item mdui-ripple">{{item}}</a>
+                        </ul>
+
                     </ol>
                     <ol>
                         <ul>请复制链接或右键选择迅雷下载</ul>
-                        <ul v-for="item in downloadList"><a :href="item">{{item}}</a></ul>
+                        <ul v-for="item in downloadList"  class="mdui-list-item mdui-ripple"><a :href="item">{{item}}</a></ul>
                     </ol>
                 </div>
             </div>
@@ -34,6 +44,7 @@
 
         </div>
 
+        <script src="../js/mdui.min.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
         <script src="../js/detail.js"></script>

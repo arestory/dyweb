@@ -1,0 +1,48 @@
+<html>
+
+<head>
+  <link type="text/css" rel="stylesheet" href="../css/more.css" />
+  <link rel="stylesheet" href="../css/mdui.min.css" />
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>search</title>
+</head>
+
+<body>
+  <div id="app">
+
+    <div class="mdui-appbar" id="bar">
+      <div class="mdui-toolbar mdui-color-indigo">
+        <a class="mdui-btn mdui-btn-icon" onclick="back()"><i class="mdui-icon material-icons">arrow_back</i></a>
+        <a href="javascript:;" class="mdui-typo-title">关于’{{keyword}}‘的搜索结果</a>
+      </div>
+    </div>
+
+    <div class="mdui-progress" v-if="finish == false">
+      <div class="mdui-progress-indeterminate"></div>
+    </div>
+          <p v-if="empty" style="text-align:center;height:100%;margin-top:240px">没有搜索结果</p>
+
+    <div v-if="finish"> 
+       <ol>
+
+
+        <li v-for="item in items"> <a href="#" class="mdui-list-item mdui-ripple" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
+        </li>
+        <ul>
+      </ol>
+    </div>
+  </div>
+
+  <script src="../js/mdui.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+  <script src="../js/jq.js"></script>
+  <script src="../js/search.js"></script>
+</body>
+
+
+
+</html>

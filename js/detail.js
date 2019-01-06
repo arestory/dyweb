@@ -2,6 +2,29 @@
 
 var href = localStorage.index
 var title = localStorage.title
+var prepage = localStorage.prepage
+var tabBar = new Vue({
+    el:'#bar',
+    coverImg:"",
+    desc:[],
+    item:"",
+    downloadList:[],
+    data:{
+        message:"haha",
+        href:href,
+        title:title,
+        coverImg:"",
+        desc:[],
+        prepage:prepage,
+        downloadList:[],
+        finish:false,
+
+        back:function(){
+            back()
+        }
+        
+    } 
+}) 
 var app = new Vue({
     el:'#app',
     coverImg:"",
@@ -18,11 +41,16 @@ var app = new Vue({
         finish:false,
 
         back:function(){
-            window.location.href='index.html'; 
+            back()
         }
         
     } 
 }) 
+
+function back(){
+    window.location.href=prepage; 
+
+}
 
 function getDetail(href){
     var url = "http://212.64.93.216:9595/movie/detail"
@@ -44,8 +72,7 @@ function getDetail(href){
             app.coverImg = data['coverImg']
             app.desc=data['desc']
             app.downloadList = data['downloadList']
-            app.finish = true
-            console.log(app)
+            app.finish = true 
         }})
 }
 

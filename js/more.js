@@ -39,6 +39,7 @@ function showDetail(name,href){
     window.location.href='detail.html';
     localStorage.index = href
     localStorage.title = name 
+    localStorage.prepage = "search.html"
  
 
 }

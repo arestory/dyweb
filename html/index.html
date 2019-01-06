@@ -1,90 +1,113 @@
 <html>
+
 <head>
-<link type="text/css"  rel="stylesheet" href="../css/index.css"/>
-<link type="text/css"  rel="stylesheet" href="../css/pb.css"/>
+  <link type="text/css" rel="stylesheet" href="../css/index.css" />
+  <link type="text/css" rel="stylesheet" href="../css/pb.css" />
+  <link rel="stylesheet" href="../css/mdui.min.css" />
 
-<script src="../js/jq.js"></script>
-<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>heaven</title>
+  <script src="../js/jq.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>heaven</title>
 </head>
-<body> 
-<div id="app-china" class="cardBox"> 
- 
-    <div class="headerBox" >华语</div>
-    <div class="bodyBox">
-    <ol>
-    <li class="item-li" v-for="item in movies">
-    <a  class="item-content"  href="javascript:void(0);" v-on:click="showDetail(item.name,item.href)" >{{item.name}}</a>
-    </li>
-    </ol>
-    <div class="item-more">
-    <a href="javascript:void(0);" v-on:click="showMoreMovie" >更多电影</a></div> 
-    <ol>
-    <li class="item-li" v-for="item in tvs">
-    <a  class="item-content"  href="javascript:void(0);" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
-    </li>
-    </ol>
-     <div class="item-more">
-    <a href="javascript:void(0);" v-on:click="showMoreTv" >更多电视剧</a></div>  
-    </div> 
-</div>
 
-<div id="app-rihan" class="cardBox"> 
- 
-    <div class="headerBox" >日韩</div>
-    <div class="bodyBox">
-    <ol>
-    <li class="item-li" v-for="item in movies">
-    <a  class="item-content"  href="javascript:void(0);" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
-    </li>
-    </ol>
-    <div class="item-more">
-    <a href="javascript:void(0);" v-on:click="showMoreMovie" >更多电影</a></div> 
-    <ol>
-    <li class="item-li" v-for="item in tvs">
-    <a  class="item-content"  href="javascript:void(0);" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
-    </li>
-    </ol>
-     <div class="item-more">
-    <a href="javascript:void(0);" v-on:click="showMoreTv" >更多电视剧</a></div>  
-    </div> 
-</div>
-<div id="app-oumei" class="cardBox"> 
- 
-    <div class="headerBox" >欧美</div>
-    <div class="bodyBox">
-    <ol>
-    <li class="item-li" v-for="item in movies">
-    <a  class="item-content"  href="javascript:void(0);" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
-    </li>
-    </ol>
-    <div class="item-more">
-    <a href="javascript:void(0);" v-on:click="showMoreMovie" >更多电影</a></div> 
-    <ol>
-    <li class="item-li" v-for="item in tvs">
-    <a  class="item-content"  href="javascript:void(0);" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
-    </li>
-    </ol>
-     <div class="item-more">
-    <a href="javascript:void(0);" v-on:click="showMoreTv" >更多电视剧</a></div>  
-    </div> 
-</div>
-<div id="app-zongyi" class="cardBox"> 
- 
-    <div class="headerBox" >综艺</div>
-    <div class="bodyBox">
-    <ol>
-    <li class="item-li" v-for="item in movies">
-    <a  class="item-content"  href="javascript:void(0);" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
-    </li>
-    </ol> 
-     <div class="item-more">
-    <a href="javascript:void(0);" v-on:click="showMore" >更多综艺</a></div>  
-    </div> 
-</div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
-<script src="../js/index.js"></script>
+<body>
+  <div class="mdui-appbar" >
+    <div class="mdui-toolbar mdui-color-indigo">
+      <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+      <a href="javascript:;" class="mdui-typo-title">heavn</a>
+    </div>
+    <div class="mdui-tab mdui-color-indigo" mdui-tab>
+      <a href="#tab_china" class="mdui-ripple">华语</a>
+      <a href="#tab_rihan" class="mdui-ripple">日韩</a>
+      <a href="#tab_oumei" class="mdui-ripple">欧美</a>
+      <a href="#tab_zongyi" class="mdui-ripple">综艺</a>
+    </div>
+    <div id="tab_china" class="mdui-list">
+      <ol>
+        <li v-for="item in movies"> <a href="#" class="mdui-list-item mdui-ripple" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
+        </li>
+
+      </ol>
+      <a href="#" class="mdui-list-item mdui-ripple">更多电影</a>
+
+      <ol>
+        <div class="mdui-divider"></div>
+
+        <li v-for="item in tvs"> <a href="#" class="mdui-list-item mdui-ripple" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
+        </li>
+
+      </ol>
+      <a href="#" class="mdui-list-item mdui-ripple">更多电视剧</a>
+
+    </div>
+
+    <div id="tab_rihan" class="mdui-list">
+      <ol>
+        <li v-for="item in movies"> <a href="#" class="mdui-list-item mdui-ripple" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
+        </li>
+
+      </ol>
+      <a href="#" class="mdui-list-item mdui-ripple">更多电影</a>
+
+      <ol>
+        <div class="mdui-divider"></div>
+
+        <li v-for="item in tvs"> <a href="#" class="mdui-list-item mdui-ripple" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
+        </li>
+
+      </ol>
+      <a href="#" class="mdui-list-item mdui-ripple">更多电视剧</a>
+    </div>
+    <div id="tab_oumei" class="mdui-list">
+      <ol>
+        <li v-for="item in movies"> <a href="#" class="mdui-list-item mdui-ripple" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
+        </li>
+
+      </ol>
+      <a href="#" class="mdui-list-item mdui-ripple">更多电影</a>
+
+      <ol>
+        <div class="mdui-divider"></div>
+
+        <li v-for="item in tvs"> <a href="#" class="mdui-list-item mdui-ripple" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
+        </li>
+
+      </ol>
+      <a href="#" class="mdui-list-item mdui-ripple">更多电视剧</a>
+    </div>
+
+    <div id="tab_zongyi" class="mdui-list">
+      <ol>
+        <li v-for="item in movies"> <a href="#" class="mdui-list-item mdui-ripple" v-on:click="showDetail(item.name,item.href)">{{item.name}}</a>
+        </li>
+
+      </ol>
+      <a href="#" class="mdui-list-item mdui-ripple">更多综艺</a>
+
+    </div>
+
+
+
+    <button mdui-dialog="{target: '#searchDialog'}" class="mdui-fab mdui-fab-fixed mdui-ripple" style="background-color:#FF4081"><i
+        style="color:#ffffff" class="mdui-icon material-icons">search</i></button>
+    <div class="mdui-dialog" id="searchDialog">
+      <div class="mdui-dialog-content">
+        <div class="mdui-dialog-title">搜索</div>
+
+        <div class="mdui-textfield" style="padding:10px">
+          <input id='searchContent' class="mdui-textfield-input" type="text" v-on:onkeydown="onEnterPress" placeholder="不少于2个关键字" />
+        </div>
+      </div>
+      <div class="mdui-dialog-actions" id="search">
+        <button class="mdui-btn mdui-ripple" v-on:click="beginsearch">开始搜索</button>
+      </div>
+    </div>
+  </div>
+  <script src="../js/mdui.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+  <script src="../js/index.js"></script>
 </body>
 
 

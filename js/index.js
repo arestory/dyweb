@@ -1,15 +1,19 @@
+// document.addEventListener('touchmove',null,{passive:false}); 
+
 function showDetail(name,href){
 
     window.location.href='detail.html';
     localStorage.index = href
     localStorage.title = name 
- 
+    localStorage.prepage = "index.html"
+
 
 }
-var appChina = new Vue({
+
+var appTabChina = new Vue({
     href:"",
     name:"",
-    el:'#app-china',
+    el:'#tab_china',
     data:{
         message:"haha",
         movies:[{
@@ -29,10 +33,86 @@ var appChina = new Vue({
             href:""
 
         }],
-    }
-
-
+    } 
 })
+
+var appTabRihan = new Vue({
+    href:"",
+    name:"",
+    el:'#tab_rihan',
+    data:{
+        message:"haha",
+        movies:[{
+            name:"正在加载数据",
+            href:""
+
+        }],showDetail:function(title,href){
+
+           showDetail(title,href)
+        },showMoreMovie:function(){
+            showMore('china',"get_movies")
+        },showMoreTv:function(){ 
+            showMore('china',"get_tvs")
+        },
+        tvs:[{
+            name:"正在加载数据",
+            href:""
+
+        }],
+    } 
+})
+
+var appTabOumei = new Vue({
+    href:"",
+    name:"",
+    el:'#tab_oumei',
+    data:{
+        message:"haha",
+        movies:[{
+            name:"正在加载数据",
+            href:""
+
+        }],showDetail:function(title,href){
+
+           showDetail(title,href)
+        },showMoreMovie:function(){
+            showMore('china',"get_movies")
+        },showMoreTv:function(){ 
+            showMore('china',"get_tvs")
+        },
+        tvs:[{
+            name:"正在加载数据",
+            href:""
+
+        }],
+    } 
+})
+
+var appTabZongyi = new Vue({
+    href:"",
+    name:"",
+    el:'#tab_zongyi',
+    data:{
+        message:"haha",
+        movies:[{
+            name:"正在加载数据",
+            href:""
+
+        }],showDetail:function(title,href){
+
+           showDetail(title,href)
+        },showMoreMovie:function(){
+            showMore('china',"get_movies")
+        },showMoreTv:function(){ 
+            showMore('china',"get_tvs")
+        },
+        tvs:[{
+            name:"正在加载数据",
+            href:""
+
+        }],
+    } 
+}) 
 function showMore(area,type){
 
     localStorage.area = area
@@ -40,83 +120,7 @@ function showMore(area,type){
     window.location.href='more.html';
 
 }
-var appRihan = new Vue({
-    
-    href:"",
-    name:"",
-    el:'#app-rihan',
-    data:{
-        message:"haha",
-        movies:[{
-            name:"正在加载数据",
-            href:""
 
-        }],
-        tvs:[{
-            name:"正在加载数据",
-            href:""
-
-        }],showDetail:function(title,href){
-
-            showDetail(title,href)
-        },showMoreMovie:function(){
-            showMore('china',"get_movies")
-        },showMoreTv:function(){
-           
-            showMore('china',"get_tvs")
-        },
-    }
-
-
-})
-var appOumei = new Vue({ 
-    href:"",
-    name:"",
-    el:'#app-oumei',
-    data:{
-        message:"haha",
-        movies:[{
-            name:"正在加载数据",
-            href:""
-
-        } ],
-        tvs:[{
-            name:"正在加载数据",
-            href:""
-
-        }],showDetail:function(title,href){
-
-            showDetail(title,href)
-        },showMoreMovie:function(){
-            showMore('china',"get_movies")
-        },showMoreTv:function(){
-           
-            showMore('china',"get_tvs")
-        },
-    }
-
-
-})
-var appZongyi = new Vue({
-    url:"",
-    el:'#app-zongyi',
-    data:{
-        message:"haha",
-        movies:[{
-            name:"正在加载数据",
-            href:""
-
-        } ],showDetail:function(title,href){
-
-            showDetail(title,href)
-        },showMore:function(){
-
-            showMore("china","get_zhongyi")
-        }
-    }
-
-
-})
 
 function log(data){
     console.log(data)
@@ -139,7 +143,7 @@ function get_data(type,areaP,page){
             index:page,
         },
         success:function(data){
-             log(data)
+            //  log(data)
             var isLoadNextPage = false
             if(page!="index.html"){
 
@@ -149,32 +153,41 @@ function get_data(type,areaP,page){
             var list = data['list']
             if(areaP=='china'){
                 if(type=='get_movies'){
-                    appChina.movies= list.slice(0,15);
 
+                    appTabChina.movies = list.slice(0,10);
                 }else{
-                    appChina.tvs= list.slice(0,15); 
+
+                    appTabChina.tvs=   list.slice(0,10); 
                 }
 
             }else if(areaP=='rihan'){
 
                 if(type=='get_movies'){
-                    appRihan.movies= list.slice(0,15);
+
+                    appTabRihan.movies= list.slice(0,10);
 
                 }else{
-                    appRihan.tvs= list.slice(0,15); 
+
+                    appTabRihan.tvs= list.slice(0,10);
+
                 }
             } else if(areaP=='oumei'){
 
                 if(type=='get_movies'){
-                    appOumei.movies= list.slice(0,15);
+
+
+                    appTabOumei.movies= list.slice(0,10);
 
                 }else{
-                    appOumei.tvs= list.slice(0,15); 
+                    appTabOumei.tvs= list.slice(0,10);
+
+
                 }
             }else{
                 if(type=='get_zhongyi'){
 
-                    appZongyi.movies=list 
+
+                    appTabZongyi.movies = list
 
                 }
             } 
@@ -200,3 +213,43 @@ get_data("get_tvs","rihan","index.html")
 get_data("get_movies","oumei","index.html")
 get_data("get_tvs","oumei","index.html") 
 get_data("get_zhongyi","","index.html")
+
+
+var search = new Vue({
+
+    el:"#search",
+    data:{
+
+        search:function(){
+
+            log("click")
+
+        },
+        onEnterPress:function(){
+            log(event.keyCode)
+
+        },
+        cancel:function(){
+
+            log("cancel")
+        },
+        beginsearch:function(){
+            var keyword= $('#searchContent').val()
+            localStorage.keyword=keyword
+            window.location.href="search.html"
+        }
+    }
+})
+function onEnterPress(){
+
+    log(event.keyCode)
+    if (event.keyCode == 13){
+
+      alert('haha')
+    }}
+
+function searchDy(){
+  
+     
+}
+  
