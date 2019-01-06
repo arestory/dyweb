@@ -60,6 +60,8 @@ function get_data(keyword){
         error:function(e){
 
             console.log(e)
+            app.empty = true 
+            app.finish=true
         },
         
 

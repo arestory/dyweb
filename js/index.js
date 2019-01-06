@@ -235,8 +235,29 @@ var search = new Vue({
         },
         beginsearch:function(){
             var keyword= $('#searchContent').val()
-            localStorage.keyword=keyword
-            window.location.href="search.html"
+            var hadError = false
+            if(keyword.length==0){ 
+               hadError = true
+               $('#error').text = "内容不能为空"
+            }
+            if(keyword&&keyword.length>=2){
+                hadError = false
+            }else{ 
+                hadError = true
+
+                $('#error').text('关键字长度不能小于2'); 
+
+            }
+            if(hadError){
+                $('#textfield').addClass('mdui-textfield-invalid');
+            }else{
+                $('#textfield').removeClass('mdui-textfield-invalid');
+
+
+                localStorage.keyword=keyword
+                window.location.href="search.html"
+
+            }
         }
     }
 })
