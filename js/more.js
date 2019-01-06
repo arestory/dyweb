@@ -1,18 +1,51 @@
 
 var area = localStorage.area
 var type = localStorage.type
+
+function getTitle(){
+    var  title = ""
+    if(area=='china'){
+        if(type=='get_movies'){
+
+            title="华语电影"
+        }else{    
+            title="华语电视剧"
+        }
+
+    }else if(area=='rihan'){
+        if(type=='get_movies'){
+            title="日韩电影"
+        }else{
+            title="日韩电视剧"
+        }
+    } else if(area=='oumei'){
+        if(type=='get_movies'){
+            title="欧美电影" 
+ 
+        }else{
+            title="美剧"
+        }
+    }else{
+        if(type=='get_zhongyi'){ 
+            title="更多综艺"
+        }
+    } 
+    return title 
+}
 var app = new Vue({
     el:'#app', 
     item:"",  href:"",
     name:"",
     prePage:"index.html",
     nextPage:'',
-    loadMoreFinish:false,
     finish:false,
     hadPrePage:false,
+
     data:{  
+        title:getTitle(),
         finish:false,
-        loadMoreFinish:false,
+        
+    loadMoreFinish:true,
         items:[],
         hadPrePage:false,
         prePage:"index.html",
@@ -48,8 +81,11 @@ function showDetail(name,href){
 function log(data){
     console.log(data)
 }
-function get_data(type,areaP,page){
+function get_data(type,area,page){
+    if(page!='index.html'){
 
+        app.loadMoreFinish = false
+    }
     var url = "http://212.64.93.216:9595/"+type
     $.ajax(url,{
         method:"GET", 
@@ -60,7 +96,7 @@ function get_data(type,areaP,page){
             'Access-Control-Allow-Headers':'x-requested-with,content-type'
         },
         data:{
-            area:areaP,
+            area:area,
             index:page,
         },
         success:function(data){
@@ -69,6 +105,7 @@ function get_data(type,areaP,page){
             if(page!="index.html"){
 
                 isLoadNextPage = true
+                app.loadMoreFinish = true
             }
             var nextpage = data['nextpage']
             var list = data['list'] 
@@ -77,8 +114,7 @@ function get_data(type,areaP,page){
                 app.hadPrePage = true
                 app.items.push.apply(app.items,list)
             }else{
-                app.hadPrePage = false
-
+                app.hadPrePage = false 
                  app.items = list  
             }
             app.nextPage=nextpage 
@@ -88,6 +124,7 @@ function get_data(type,areaP,page){
         error:function(e){
 
             console.log(e)
+ 
         },
         
 
