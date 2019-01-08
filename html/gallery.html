@@ -14,7 +14,7 @@
 
         <div v-for="item in items" class="mdui-col" style="width:200px;height:200px;" >
             <div class="mdui-grid-tile">
-                <img :src="item.avatar"  width="100%" height="100%" />
+                <img   :src="item.avatar" style="hover{width:120%;height:120%}" width="100%" height="100%" />
                 <div class="mdui-grid-tile-actions mdui-grid-tile-actions-transparent">
                     <div class="mdui-grid-tile-text">
                         <div class="mdui-grid-tile-title">{{item.name}}</div>

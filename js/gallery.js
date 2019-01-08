@@ -33,7 +33,7 @@ function get_user_list(page, count) {
             success: function (data) {
                 var users = data.filter(function (item, index) {
 
-                    return item['avatar'].length != 0
+                    return item['avatar'].length != 0 && item['gender'] =='F'
                 })
                 console.log(users)
                 if (page > 1) {
@@ -60,7 +60,7 @@ $(window).scroll(function () {
     var contentHeight = $("#app").get(0).scrollHeight; //内容高度  
 
     var scrollHeight = $(window).scrollTop(); //滚动高度  
-    console.log("viewHeight:" + viewHeight + ",contentHeight:" + contentHeight + ",scrollHeight:" + scrollHeight);
+    // console.log("viewHeight:" + viewHeight + ",contentHeight:" + contentHeight + ",scrollHeight:" + scrollHeight);
     if (viewHeight - scrollHeight <= 954) {
 
         if(app.isLoadMoreFinish){
