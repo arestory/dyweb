@@ -55,17 +55,21 @@ get_user_list(1, 100)
 
 $(window).scroll(function () {
 
-    var viewHeight = $(window).height(); //可见高度  
-
-    var contentHeight = $("#app").get(0).scrollHeight; //内容高度  
+    var viewHeight = 900; //可见高度 
+    var windowWidth = $(window).width();
+    var count = windowWidth / 200;//行数
+    console.log(app.items.length + 'hhh'  + windowWidth +'width' + count +"count");
+    var contentHeight = (app.items.length % count == 0 ? app.items.length / count : app.items.length / count + 1) * 200
+    
+    // var contentHeight = $("#app").get(0).contentHeight; //内容高度  
+    // var contentHeight = $("#app").
 
     var scrollHeight = $(window).scrollTop(); //滚动高度  
-    // console.log("viewHeight:" + viewHeight + ",contentHeight:" + contentHeight + ",scrollHeight:" + scrollHeight);
-    if (viewHeight - scrollHeight <= 954) {
-
+    console.log("viewHeight:" + viewHeight + ",contentHeight:" + contentHeight + ",scrollHeight:" + scrollHeight);
+    if (contentHeight-900-200  - scrollHeight <= 10) {
+        console.log('diaoyong')
         if(app.isLoadMoreFinish){
             get_user_list(currentPage+1, 100)
-
         }
 
     }

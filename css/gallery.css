@@ -6,4 +6,6 @@ img:hover {
     -o-transform: scale(1.2);
     transform: scale(1.2);
 }
- 
+body{
+    height: 100%;
+} 
