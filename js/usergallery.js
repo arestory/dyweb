@@ -2,27 +2,27 @@ var app = new Vue({
 
 
     el: "#app",
-    avatar: "",
+    photo: "",
+    author_name:"",
     name: "",
     userid:"",
     data: {
         isLoadMoreFinish:true,
         items: [],  
         checkUser:function(userid){
-           localStorage.userId = userid
-           window.location.href="usergallery.html"
+           localStorage.userId = userid 
         }
 
     }
 
 }) 
 var currentPage = 1;
-function get_user_list(page, count) {
+function get_train_list(page, count) {
     this.currentPage = page
     if(page!=1){
         app.isLoadMoreFinish = false
     }
-    var url = "http://212.64.93.216:9090/users"
+    var url = "http://212.64.93.216:9090/trains/"+page+"/"+count
     $.ajax(url, {
             method: "GET",
             dataType: 'jsonp',
@@ -30,23 +30,19 @@ function get_user_list(page, count) {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'x-requested-with,content-type'
-            },
-            data: {
-                page: page,
-                count: count,
-            },
+            }, 
             success: function (data) {
-                var users = data.filter(function (item, index) {
+                var items = data.filter(function (item, index) {
 
-                    return item['avatar'].length != 0 && item['gender'] =='F'
+                    return item['photo'].length != 0
                 })
-                console.log(users)
+                console.log(items)
                 if (page > 1) {
                     app.isLoadMoreFinish =true
-                    app.items = app.items.concat(users)
+                    app.items = app.items.concat(items)
                 } else {
 
-                    app.items = users
+                    app.items = items
                 }
             },
             error:function(e){
@@ -59,7 +55,7 @@ function get_user_list(page, count) {
 
 } 
 
-get_user_list(1, 100)
+get_train_list(1, 100)
 
 $(window).scroll(function () {
 
@@ -77,7 +73,7 @@ $(window).scroll(function () {
     if (contentHeight-900-200  - scrollHeight <= 10) {
         // console.log('diaoyong')
         if(app.isLoadMoreFinish){
-            get_user_list(currentPage+1, 100)
+            get_train_list(currentPage+1, 100)
         }
 
     }
