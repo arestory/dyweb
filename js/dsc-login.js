@@ -40,7 +40,7 @@ function login(name,pwd){
     }
 
     changeLoginStatus(false)
-    var url = 'http://127.0.0.1:5555/login';
+    var url = 'http://212.64.93.216:7575/login';
     $.ajax(url,{
         method:"GET",  
         data:{

@@ -28,7 +28,7 @@ function get_user_gallery(lastId) {
     }
 
     token = localStorage.token 
-    var url = "http://127.0.0.1:5555/get_user_gallery"
+    var url = "http://212.64.93.216:7575/get_user_gallery"
     $.ajax(url, {
 
           method :"GET",
