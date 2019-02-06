@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../css/mdui.min.css" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>动态</title>
+</head>
+
+<body>
+
+    <div id="app">
+  <div class="mdui-appbar" id="bar">
+            <div class="mdui-toolbar mdui-color-indigo">
+                <a class="mdui-btn mdui-btn-icon" onclick="back()"><i class="mdui-icon material-icons">arrow_back</i></a>
+                <a href="javascript:;" class="mdui-typo-title">{{title}}</a>
+            </div>
+        </div>
+        <div v-for="item in items" style="width:100%;margin-left:20px;">
+
+            <br/> 
+            <div style="height:30px;text-align:start" >{{item.insert_date}}    {{item.feeds_data}}</div>
+            <div class="mdui-row-xs-3 mdui-row-sm-4 mdui-row-md-10 mdui-row-lg-6 mdui-row-xl-7 mdui-grid-list">
+                <div v-for="img in item.image" class="mdui-col" style="width:200px;height:200px;">
+                 <img  v-on:click="checkPhoto(img)" :src="img" originsrc="../img/holder.png" style="hover{width:120%;height:120%};cursor:hand;"
+                    width="100%" height="100%" /> 
+                </div>
+            </div>
+
+            <br/> 
+        </div>
+        <div class="mdui-progress" v-if="isLoadMoreFinish == false">
+            <div class="mdui-progress-indeterminate"></div>
+        </div>
+
+        <div class="mdui-dialog" id="user-dialog" style="height:500px;500px;">
+            <div class="mdui-dialog-content">
+                <div > 
+                        <img  class="div-inline" :src="img" style="height:500px;500px;" /> 
+                    
+                </div>
+            </div>
+            <div class="mdui-dialog-actions">
+                <button class="mdui-btn mdui-ripple" mdui-dialog-close>关闭</button>
+               
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <link rel="stylesheet" href="../css/mdui.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+    <script src="../js/jq.js"></script>
+    <script src="../js/mdui.js"></script>
+    <script src="../js/dsc_user_gallery.js"></script>
+</body>
+
+
+
+</html>

@@ -1,0 +1,107 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../css/mdui.min.css" />
+    <link rel="stylesheet" href="../css/dsc-gallery.css" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>用户数据</title>
+</head>
+
+<body>
+   
+    <div class="mdui-panel" mdui-panel>
+    <div class="mdui-panel-item">
+      <div class="mdui-panel-item-header">查看筛选条件<i class="mdui-icon material-icons">&#xe5c5;</i></div>
+      <div class="mdui-panel-item-body">
+         <div style="padding:10px">
+        <label class="mdui-checkbox">
+            <input type="checkbox" id="cb90" onclick="check90s()" />
+            <i class="mdui-checkbox-icon"></i>
+            只看90后
+        </label>
+ 
+        <div class="mdui-textfield" style="width:20%">
+            <label class="mdui-textfield-label">最小年龄，请输入如’1992‘</label>
+            <input class="mdui-textfield-input" type="number"  id="yearInput" />
+        </div>
+        <div class="mdui-textfield" style="width:20%">
+            <label class="mdui-textfield-label">家乡，输入如’茂名‘</label>
+            <input class="mdui-textfield-input" type="text"  id="htInput"/>
+        </div>
+        <div style="width:20%;margin-left:15%">
+                <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="search()">搜索</button>
+
+        </div>
+
+    </div>
+      </div>
+    </div>
+    <div id="app" style="padding:10px;" class="mdui-row-xs-3 mdui-row-sm-4 mdui-row-md-10 mdui-row-lg-6 mdui-row-xl-7 mdui-grid-list">
+
+        <div v-for="item in items" class="mdui-col" style="width:200px;height:200px;">
+            <div class="mdui-grid-tile">
+                <img :id="item.id" v-on:click="checkUser(item)" :src="item.avatar" originsrc="../img/holder.png" style="hover{width:120%;height:120%};cursor:hand;"
+                    width="100%" height="100%" />
+                <div class="mdui-grid-tile-actions mdui-grid-tile-actions-transparent">
+                    <div class="mdui-grid-tile-text">
+                        <div class="mdui-grid-tile-title">{{item.hometown}}</div>
+
+                    </div>
+                    <div class="mdui-grid-tile-title">{{item.birthday}}</div>
+
+                </div>
+                <div class="mdui-grid-tile-actions mdui-grid-tile-actions-top">
+                    <div class="mdui-grid-tile-title">{{item.name}}</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="mdui-progress" v-if="isLoadMoreFinish == false">
+            <div class="mdui-progress-indeterminate"></div>
+        </div>
+
+        <div class="mdui-dialog" id="user-dialog">
+            <div class="mdui-dialog-content">
+                <div id="div1">
+                    <img class="div-inline" :src="user.avatar" style="height:300px;width:300px;" />
+                    <div class="div-inline" style="margin-left:20px;height:300px">
+                        <div class="mdui-dialog-title">{{user.name}}</div>
+
+                        <br />生日: {{user.birthday}}
+                        <br />身高: {{user.height}}cm
+                        <br />体重: {{user.weight}}kg
+                        <br />学历: {{user.education}}
+                        <br />星座: {{user.star_sign}}
+                        <br />简介: {{user.characters}}
+                        <br />理想伴侣: {{user.ideal_mate}}
+                        <br />兴趣: {{user.hobby}}
+                        <br />所在城市: {{user.city}}
+                        <br />家乡: {{user.hometown}}
+                        <br />工作单位: {{user.company}}
+                    </div>
+                </div>
+            </div>
+            <div class="mdui-dialog-actions">
+                <button class="mdui-btn mdui-ripple" mdui-dialog-close>关闭</button>
+                <button class="mdui-btn mdui-ripple" v-on:click="interest(user.id)">关注她</button>
+                <button class="mdui-btn mdui-ripple" v-on:click="seeMore(user.id)">查看更多动态</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <link rel="stylesheet" href="../css/mdui.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+    <script src="../js/jq.js"></script>
+    <script src="../js/mdui.js"></script>
+    <script src="../js/dsc_gallery.js"></script>
+</body>
+
+
+
+</html>
