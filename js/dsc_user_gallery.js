@@ -42,6 +42,8 @@ function get_user_gallery(lastId) {
               token:token,
               userId: localStorage.lastUserId, 
               lastId: lastId,
+              name:localStorage.loginUserName,
+              password:localStorage.loginUserPwd
           },
           success:function(res){
 
