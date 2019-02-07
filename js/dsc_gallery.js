@@ -27,31 +27,46 @@ var app = new Vue({
             window.location.href='dsc_user_gallery.html'
         },
         interest:function(userId){
-            $.ajax('http://212.64.93.216:7575/interest',{
+            
+                $.ajax('http://212.64.93.216:7575/interest',{
 
-                method: "GET",
-                dataType: 'jsonp',
-                jsonp: "jsonpCallback",
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Headers': 'x-requested-with,content-type', 
-                    
-                },
-                data: { 
-                    userId:userId,
-                    token:localStorage.token,
-                },
-                success: function (data) { 
-                        mdui.snackbar({
-                            message: data['data'],
-                            position: 'bottom'
-                          });
-                       
-                },
+                    method: "GET",
+                    dataType: 'jsonp',
+                    jsonp: "jsonpCallback",
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'x-requested-with,content-type', 
+                        
+                    },
+                    data: { 
+                        userId:userId,
+                        token:localStorage.token,
+                        name:localStorage.loginUserName,
+                        password:localStorage.loginUserPwd
+                    },
+                    success: function (data) {
+                        
+                            if(data['code']==10003){
+                                localStorage.token=""
+                                confirm("你未登陆")
+                                window.location.href="dsc_login.html"
+                            }else{
+                                mdui.snackbar({
+                                    message: data['data'],
+                                    position: 'bottom'
+                                  });
+                            }
 
+                           
+                           
+                    },
+    
+    
+    
+                })
 
-
-            })
+            
+            
 
         }
 
