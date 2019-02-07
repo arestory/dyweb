@@ -24,11 +24,12 @@ var app = new Vue({
         seeMore:function(userId){
            
             localStorage.lastUserId = userId
-            window.location.href='dsc_user_gallery.html'
+            // window.location.href='dsc_user_gallery.html'
+            window.open('dsc_user_gallery.html')
         },
         interest:function(userId){
             
-                $.ajax('http://212.64.93.216:7575/interest',{
+                $.ajax(localStorage.localhost+'/interest',{
 
                     method: "GET",
                     dataType: 'jsonp',
@@ -98,7 +99,7 @@ function search_user_list(year,hometown,startIndex, count){
     if(startIndex!=1){
         app.isLoadMoreFinish = false
     }
-    var url = "http://212.64.93.216:7575/get_user_list_with_area_and_birth"
+    var url = localStorage.localhost+"/get_user_list_with_area_and_birth"
     $.ajax(url, {
             method: "GET",
             dataType: 'jsonp',
@@ -146,7 +147,7 @@ function get_user_list(startIndex, count) {
     if(startIndex!=1){
         app.isLoadMoreFinish = false
     }
-    var url = "http://212.64.93.216:7575/get_user_list"
+    var url = localStorage.localhost+"/get_user_list"
     $.ajax(url, {
             method: "GET",
             dataType: 'jsonp',
@@ -189,7 +190,7 @@ function get_90s_user_list(startIndex, count) {
     if(startIndex!=1){
         app.isLoadMoreFinish = false
     }
-    var url = "http://212.64.93.216:7575/get_user_list_between_birthday"
+    var url = localStorage.localhost+"/get_user_list_between_birthday"
     $.ajax(url, {
             method: "GET",
             dataType: 'jsonp',
