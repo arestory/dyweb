@@ -4,6 +4,7 @@ var app = new Vue({
     el: "#app",  
     data: {
         isLoadMoreFinish:true,
+        hadNoMoreItems:false,
         items: [],  
         img:"", 
         title:localStorage.userName,
@@ -20,6 +21,7 @@ var app = new Vue({
 var currentLastId = '0'
 
 var items = []
+
 
 function get_user_gallery(lastId) {
     this.currentLastId = lastId
@@ -54,6 +56,7 @@ function get_user_gallery(lastId) {
                     if(items.length==0){
                         
                         alert('该用户没有动态')
+                        window.close()
                     }
                     app.items = items
 
@@ -64,8 +67,16 @@ function get_user_gallery(lastId) {
                     app.isLoadMoreFinish =true
                 }
                 
+
                 currentLastId = app.items[app.items.length-1]['feeds_id']
 
+            }
+            if(res['code']==20101){
+                app.hadNoMoreItems = true
+            }
+            if(res['token']){
+
+                localStorage.token=res['token']
             }
               console.log(res)
           },
@@ -103,7 +114,7 @@ $(window).scroll(function () {
     // console.log("viewHeight:" + viewHeight + ",contentHeight:" + contentHeight + ",scrollHeight:" + scrollHeight);
     if (contentHeight-900-200  - scrollHeight <= 10) {
         // console.log('diaoyong')
-        if(app.isLoadMoreFinish){
+        if(app.isLoadMoreFinish&&!app.hadNoMoreItems){
             get_user_gallery(currentLastId)
         }
 

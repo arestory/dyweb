@@ -56,6 +56,11 @@ var app = new Vue({
                                     message: data['data'],
                                     position: 'bottom'
                                   });
+
+                                  if(res['token']){
+
+                                    localStorage.token=res['token']
+                                }
                             }
 
                            
