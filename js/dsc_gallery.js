@@ -8,6 +8,7 @@ var app = new Vue({
     user:{},
     data: {
         isLoadMoreFinish:true,
+        hadNoMoreItems:false,
         items: [],  
         user:{},
         checkUser:function(user){ 
@@ -86,19 +87,37 @@ var searchStatus = false;
 function search(){ 
     var year = document.getElementById('yearInput').value;
     var hometown = document.getElementById('htInput').value; 
+    var height = document.getElementById('heightInput').value; 
     // if(year.length>0&&hometown.length>0){ 
         
     // }
+
+
+   
 
     searchStatus = true
         start=1;
 
         app.items =[] 
-        search_user_list(year,hometown,1,100);
+        search_user_list(year,hometown,height,1,100);
 
 }
 
-function search_user_list(year,hometown,startIndex, count){
+function showSnackBar(){
+
+
+}
+
+function search_user_list(year,hometown,height,startIndex, count){
+
+
+    if(year.length==0){
+        year=0
+    }
+    if(height.length==0){
+        height=0
+    }
+    console.log('year='+year+",hometown = "+hometown+",height="+height)
 
     this.start = startIndex
     if(startIndex!=1){
@@ -119,6 +138,7 @@ function search_user_list(year,hometown,startIndex, count){
                 count: count,
                 area:hometown,
                 birth:year,
+                height:height
             },
             success: function (data) {
                 var users = data.filter(function (item, index) {
@@ -128,10 +148,19 @@ function search_user_list(year,hometown,startIndex, count){
                 console.log(users)
                 if (startIndex > 1) {
                     app.isLoadMoreFinish =true
-                    app.items = app.items.concat(users)
+                    app.items = app.items.concat(users) 
+                    if(users.length==0){
+                        app.hadNoMoreItems = true;
+                        mdui.snackbar({
+                            message: '没有更多用户了',
+                            position: 'bottom'
+                          });
+                    }
+    
                 } else { 
                     app.items = users
                 }
+               
                 app.user = app.items[0];
             },
             error:function(e){
@@ -152,6 +181,7 @@ function get_user_list(startIndex, count) {
     if(startIndex!=1){
         app.isLoadMoreFinish = false
     }
+    app.hadNoMoreItems = false
     var url = localStorage.localhost+"/get_user_list"
     $.ajax(url, {
             method: "GET",
@@ -177,6 +207,13 @@ function get_user_list(startIndex, count) {
                     app.items = app.items.concat(users)
                 } else { 
                     app.items = users
+                }
+                if(users.length==0){
+                    app.hadNoMoreItems = true
+                    mdui.snackbar({
+                        message: '没有更多用户了',
+                        position: 'bottom'
+                      });
                 }
                 app.user = app.items[0];
             },
@@ -221,6 +258,13 @@ function get_90s_user_list(startIndex, count) {
                 if (startIndex > 1) {
                     app.isLoadMoreFinish =true
                     app.items = app.items.concat(users)
+                    if(users.length==0){
+                        app.hadNoMoreItems = true
+                        mdui.snackbar({
+                            message: '没有更多用户了',
+                            position: 'bottom'
+                          });
+                    }
                 } else { 
                     app.items = users
                 }
@@ -268,22 +312,27 @@ $(window).scroll(function () {
     // console.log("viewHeight:" + viewHeight + ",contentHeight:" + contentHeight + ",scrollHeight:" + scrollHeight);
     if (contentHeight-900-200  - scrollHeight <= 10) {
         // console.log('diaoyong')
-        if(app.isLoadMoreFinish){
-            if(searchStatus){
-
-                var year = document.getElementById('yearInput').value;
-                var hometown = document.getElementById('htInput').value; 
-
-                search_user_list(year,hometown,start+100,100)
-            }else{
-                if(onlyCheck90s){
-                    get_90s_user_list(start+100,100)
+         
+            if(app.isLoadMoreFinish&&!app.hadNoMoreItems){
+                if(searchStatus){
+    
+                    var year = document.getElementById('yearInput').value;
+                    var hometown = document.getElementById('htInput').value; 
+                    var height = document.getElementById('heightInput').value; 
+    
+    
+                    search_user_list(year,hometown,height,start+100,100)
                 }else{
-                    get_user_list(start+100, 100) 
-                } 
+                    if(onlyCheck90s){
+                        get_90s_user_list(start+100,100)
+                    }else{
+                        get_user_list(start+100, 100) 
+                    } 
+                }
+               
             }
-           
-        }
+        
+        
 
     }
 })

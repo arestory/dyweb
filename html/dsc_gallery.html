@@ -22,13 +22,18 @@
             只看90后
         </label>
  
-        <div class="mdui-textfield" style="width:20%">
+        <div class="mdui-textfield" style="width:40%">
             <label class="mdui-textfield-label">最小年龄，请输入如’1992‘</label>
             <input class="mdui-textfield-input" type="number"  id="yearInput" />
         </div>
-        <div class="mdui-textfield" style="width:20%">
+        <div class="mdui-textfield" style="width:40%">
             <label class="mdui-textfield-label">家乡，输入如’茂名‘</label>
             <input class="mdui-textfield-input" type="text"  id="htInput"/>
+        </div>
+
+        <div class="mdui-textfield" style="width:40%">
+            <label class="mdui-textfield-label">身高，输入如’160‘</label>
+            <input class="mdui-textfield-input" type="text"  id="heightInput"/>
         </div>
         <div style="width:20%;margin-left:15%">
                 <button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="search()">搜索</button>
@@ -58,9 +63,11 @@
                 </div>
             </div>
         </div>
+
         <div class="mdui-progress" v-if="isLoadMoreFinish == false">
             <div class="mdui-progress-indeterminate"></div>
         </div>
+
 
         <div class="mdui-dialog" id="user-dialog">
             <div class="mdui-dialog-content">
