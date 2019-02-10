@@ -99,7 +99,7 @@ function search(){
    
 
     searchStatus = true
-        start=1;
+        start=0;
 
         app.items =[] 
         search_user_list(year,hometown,height,graduate,name,0,100);
@@ -124,7 +124,7 @@ function search_user_list(year,hometown,height,graduate,name,startIndex, count){
     console.log('year='+year+",hometown = "+hometown+",height="+height)
 
     this.start = startIndex
-    if(startIndex!=1){
+    if(startIndex!=0){
         app.isLoadMoreFinish = false
     }
     var url = localStorage.localhost+"/get_user_with_complicate"
@@ -152,11 +152,13 @@ function search_user_list(year,hometown,height,graduate,name,startIndex, count){
                     return item['avatar'].length != 0
                 })
                 console.log(users)
-                if (startIndex > 1) {
+                if (startIndex > 0) {
                     app.isLoadMoreFinish =true
                     app.items = app.items.concat(users) 
                     if(users.length==0){
                         app.hadNoMoreItems = true;
+
+
                         mdui.snackbar({
                             message: '没有更多用户了',
                             position: 'bottom'
@@ -208,7 +210,7 @@ function get_user_list(startIndex, count) {
                     return item['avatar'].length != 0
                 })
                 console.log(users)
-                if (startIndex > 1) {
+                if (startIndex > 0) {
                     app.isLoadMoreFinish =true
                     app.items = app.items.concat(users)
                 } else { 
@@ -235,7 +237,7 @@ function get_user_list(startIndex, count) {
 
 function get_90s_user_list(startIndex, count) {
     this.start = startIndex
-    if(startIndex!=1){
+    if(startIndex!=0){
         app.isLoadMoreFinish = false
     }
     var url = localStorage.localhost+"/get_user_list_between_birthday"
@@ -261,7 +263,7 @@ function get_90s_user_list(startIndex, count) {
                     return item['avatar'].length != 0
                 })
                 console.log(users)
-                if (startIndex > 1) {
+                if (startIndex > 0) {
                     app.isLoadMoreFinish =true
                     app.items = app.items.concat(users)
                     if(users.length==0){
@@ -286,7 +288,7 @@ function get_90s_user_list(startIndex, count) {
 
 } 
 
-get_user_list(1, 100)
+get_user_list(0, 100)
 
 var onlyCheck90s = false;
 $("#cb90").change(function() { 
@@ -295,9 +297,9 @@ $("#cb90").change(function() {
 
     app.items =[]
     if(onlyCheck90s){
-        get_90s_user_list(1,100)
+        get_90s_user_list(start,100)
     }else{
-        get_user_list(1, 100) 
+        get_user_list(start, 100) 
     }
 
     });
