@@ -1,6 +1,6 @@
 
-localStorage.localhost = 'http://212.64.93.216:7575'
-// localStorage.localhost = 'http://127.0.0.1:5555'
+// localStorage.localhost = 'http://212.64.93.216:7575'
+localStorage.localhost = 'http://127.0.0.1:5555'
 var app = new Vue({
 
 

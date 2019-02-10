@@ -88,6 +88,9 @@ function search(){
     var year = document.getElementById('yearInput').value;
     var hometown = document.getElementById('htInput').value; 
     var height = document.getElementById('heightInput').value; 
+    var graduate = document.getElementById('graduateInput').value; 
+    var name = document.getElementById('nameInput').value; 
+    
     // if(year.length>0&&hometown.length>0){ 
         
     // }
@@ -99,7 +102,7 @@ function search(){
         start=1;
 
         app.items =[] 
-        search_user_list(year,hometown,height,1,100);
+        search_user_list(year,hometown,height,graduate,name,0,100);
 
 }
 
@@ -108,7 +111,7 @@ function showSnackBar(){
 
 }
 
-function search_user_list(year,hometown,height,startIndex, count){
+function search_user_list(year,hometown,height,graduate,name,startIndex, count){
 
 
     if(year.length==0){
@@ -117,13 +120,14 @@ function search_user_list(year,hometown,height,startIndex, count){
     if(height.length==0){
         height=0
     }
+
     console.log('year='+year+",hometown = "+hometown+",height="+height)
 
     this.start = startIndex
     if(startIndex!=1){
         app.isLoadMoreFinish = false
     }
-    var url = localStorage.localhost+"/get_user_list_with_area_and_birth"
+    var url = localStorage.localhost+"/get_user_with_complicate"
     $.ajax(url, {
             method: "GET",
             dataType: 'jsonp',
@@ -138,7 +142,9 @@ function search_user_list(year,hometown,height,startIndex, count){
                 count: count,
                 area:hometown,
                 birth:year,
-                height:height
+                height:height,
+                name:name,
+                university:graduate
             },
             success: function (data) {
                 var users = data.filter(function (item, index) {
@@ -175,7 +181,7 @@ function search_user_list(year,hometown,height,startIndex, count){
 }
 
 
-var start = 1;
+var start = 0;
 function get_user_list(startIndex, count) {
     this.start = startIndex
     if(startIndex!=1){
@@ -319,9 +325,11 @@ $(window).scroll(function () {
                     var year = document.getElementById('yearInput').value;
                     var hometown = document.getElementById('htInput').value; 
                     var height = document.getElementById('heightInput').value; 
+                    
+                    var graduate = document.getElementById('graduateInput').value; 
+                    var name = document.getElementById('nameInput').value; 
     
-    
-                    search_user_list(year,hometown,height,start+100,100)
+                    search_user_list(year,hometown,height,graduate,name,start+100,100)
                 }else{
                     if(onlyCheck90s){
                         get_90s_user_list(start+100,100)
