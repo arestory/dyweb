@@ -152,8 +152,9 @@ function search_user_list(year,hometown,height,graduate,name,startIndex, count){
                     return item['avatar'].length != 0
                 })
                 console.log(users)
+                app.isLoadMoreFinish =true
+
                 if (startIndex > 0) {
-                    app.isLoadMoreFinish =true
                     app.items = app.items.concat(users) 
                     if(users.length==0){
                         app.hadNoMoreItems = true;
@@ -211,11 +212,12 @@ function get_user_list(startIndex, count) {
                 })
                 console.log(users)
                 if (startIndex > 0) {
-                    app.isLoadMoreFinish =true
                     app.items = app.items.concat(users)
                 } else { 
                     app.items = users
                 }
+                app.isLoadMoreFinish =true
+
                 if(users.length==0){
                     app.hadNoMoreItems = true
                     mdui.snackbar({
@@ -263,8 +265,9 @@ function get_90s_user_list(startIndex, count) {
                     return item['avatar'].length != 0
                 })
                 console.log(users)
+
+                app.isLoadMoreFinish =true
                 if (startIndex > 0) {
-                    app.isLoadMoreFinish =true
                     app.items = app.items.concat(users)
                     if(users.length==0){
                         app.hadNoMoreItems = true
