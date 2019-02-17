@@ -15,7 +15,7 @@ var app = new Vue({
 function query925stocks(){
 
 
-    var url = localStorage+'/query925stocks'
+    var url = localStorage.stock_url+'/query925stocks'
     $.ajax(url, {
         method: "GET",
         dataType: 'jsonp',
