@@ -1,4 +1,4 @@
-
+localStorage.stock_url = 'http://127.0.0.1:2000'
 var app = new Vue({
 
     el: "#app", 
@@ -38,7 +38,7 @@ var app = new Vue({
              
         },
         commit_stock_list:function(){
-            var url = 'http://127.0.0.1:2000/add_stock_list'
+            var url = localStorage.stock_url+'/add_stock_list'
             $.ajax(url, {
                 method: "POST",
                 dataType: 'jsonp',

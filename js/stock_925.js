@@ -1,4 +1,7 @@
 
+if(!localStorage.stock_url){
+    localStorage.stock_url = 'http://127.0.0.1:2000'
+}
 var app = new Vue({
 
     el: "#app", 
@@ -33,7 +36,7 @@ function query925stocks(){
                     var item = data[index]
                     if(item['percent']>=1){
 
-                        item['color']='#ff4081'
+                        item['color']='#c00c00'
                     }else{
                         item['color']='#000000'
 
