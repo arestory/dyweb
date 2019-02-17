@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../css/mdui.min.css" />
+    <link rel="stylesheet" href="../css/dsc-gallery.css" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>添加股票数据</title>
+</head>
+
+<body>
+    <div id="app" style="padding:10px">
+    <div class="mdui-textfield" style="width:40%">
+            <label class="mdui-textfield-label">股票代码，请输入如’600600‘</label>
+            <input class="mdui-textfield-input" type="number"  id="codeInput" />
+        </div>
+        <div class="mdui-textfield" style="width:40%">
+            <label class="mdui-textfield-label">股票名称，输入如’青岛啤酒‘</label>
+            <input class="mdui-textfield-input" type="text"  id="nameInput"/>
+        </div>
+
+        <div class="mdui-textfield" style="width:40%">
+            <label class="mdui-textfield-label">今日涨停成交量，输入如’1000000‘</label>
+            <input class="mdui-textfield-input" type="number"  id="volInput"/>
+        </div>
+                      
+
+         <div >
+                <button style="color:#fff;background:#ff4081" class="mdui-btn mdui-btn-raised mdui-ripple" v-on:click="add_stock">添加股票</button>
+
+        </div>
+
+         <ol style="width:40%">
+        <li v-for="item in stocks_yes"> <span  class="mdui-list-item">{{item.name}},{{item.code}},成交量：{{item.vol_on_up}}<i style="margin-left:150px;float:right;" v-on:click="remove(item)" class="mdui-icon material-icons">&#xe872;</i></span>
+                <div class="mdui-divider"></div>
+
+        </li> 
+      </ol>
+
+         <div v-if="stocks_yes.length > 0"  >
+                <button   style="color:#fff;background:#ff4081" class="mdui-btn mdui-btn-raised mdui-ripple" v-on:click="commit_stock_list">提交股票数据</button>
+
+        </div>
+
+</div>
+     <link rel="stylesheet" href="../css/mdui.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+    <script src="../js/jq.js"></script>
+    <script src="../js/mdui.js"></script>
+    <script src="../js/add_stock.js"></script>
+</body>
+</html>

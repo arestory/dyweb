@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../css/mdui.min.css" />
+    <link rel="stylesheet" href="../css/dsc-gallery.css" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>9点25分股票数据</title>
+</head>
+
+<body>
+  <div id="app" style="padding:10px;width:50%">
+  
+  <div class="mdui-table-fluid">
+    <table class="mdui-table">
+      <thead>
+        <tr>
+          <th>股票代码</th>
+          <th>股票名称</th>
+          <th>昨日涨停</th>
+          <th>集合竞价</th>
+          <th>幅度 </th>
+        </tr>
+      </thead>
+       <tbody>
+       <tr v-for="item in stocks"  >
+          <td :style="{'color':item.color}">{{item.id}}</td>
+          <td :style="{'color':item.color}">{{item.name}}</td>
+          <td :style="{'color':item.color}">{{item.vol_on_up}}</td>
+          <td :style="{'color':item.color}">{{item.call_auction}}</td>
+          <td :style="{'color':item.color}">{{item.percent}} </td>
+       </tr>
+       </tbody>
+      </table>
+  </div>
+
+   <link rel="stylesheet" href="../css/mdui.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+    <script src="../js/jq.js"></script>
+    <script src="../js/mdui.js"></script>
+    <script src="../js/stock_925.js"></script>
+</body>
+<html>
