@@ -1,6 +1,6 @@
 
 if(!localStorage.stock_url){
-    localStorage.stock_url = 'http://127.0.0.1:2000'
+    localStorage.stock_url = 'http://212.64.93.216:2525'
 }
 var app = new Vue({
 
@@ -15,7 +15,7 @@ var app = new Vue({
 function query925stocks(){
 
 
-    var url = 'http://127.0.0.1:2000/query925stocks'
+    var url = localStorage+'/query925stocks'
     $.ajax(url, {
         method: "GET",
         dataType: 'jsonp',
