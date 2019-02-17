@@ -1,9 +1,10 @@
-// localStorage.stock_url = 'http://127.0.0.1:2000'
-localStorage.stock_url = 'http://212.64.93.216:2525'
+localStorage.stock_url = 'http://127.0.0.1:2000'
+// localStorage.stock_url = 'http://212.64.93.216:2525'
 var app = new Vue({
 
     el: "#app",
     data: {
+        date_hint:'',
         stocks_yes: [],
         stocks_today_add: [],
         isLoadTodayFinish: false,
@@ -134,7 +135,7 @@ function getTimeStamp() {
     var day = myDate.getDate(); 
     var hour = myDate.getHours();//获取小时
     //如果当前小时为9点前，将日期设置为前一天，因为可能是在今天录入昨天的数据
-    if(hour<9){
+    if(hour<6){
         day = day-1;
     }
     //纠正日期
@@ -158,13 +159,19 @@ function getTimeStamp() {
     if (month < 10) {
         month = '0' + month
     }
-   
+    
     console.log('hour = '+hour);
     if (day < 10) {
         day = '0' + day 
     }
     var time_stamp = year + '-' + month + '-' + day;
+    if(hour<6){
+        app.date_hint = "夜深了，已将日期调整至昨天’"+time_stamp+"'"
 
+    }else{
+
+        app.date_hint = "日期，输入如’"+time_stamp+"'"
+    }
     return time_stamp;
 }
 var time_stamp = getTimeStamp()
@@ -216,7 +223,7 @@ function query_today_add_stock() {
                 'Access-Control-Allow-Headers': 'x-requested-with,content-type',
             },
             data: {
-
+                date:getTimeStamp(),
                 list: JSON.stringify(app.stocks_yes)
             },
             success: function (data) {
