@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div id="app" style="padding:10px;width:50%">
+  <div id="app" style="padding:10px;width:50%;margin-left:25%;margin-right:25%">
   
   <div class="mdui-table-fluid">
     <table class="mdui-table">
@@ -18,9 +18,9 @@
         <tr>
           <th>股票代码</th>
           <th>股票名称</th>
-          <th>昨日涨停</th>
-          <th>集合竞价</th>
-          <th>幅度 </th>
+          <th>涨停爆量</th>
+          <th>今日集合竞价数据</th>
+          <th>比率</th> 
         </tr>
       </thead>
        <tbody>
@@ -30,6 +30,7 @@
           <td :style="{'color':item.color}">{{item.vol_on_up}}</td>
           <td :style="{'color':item.color}">{{item.call_auction}}</td>
           <td :style="{'color':item.color}">{{item.percent}} </td>
+         
        </tr>
        </tbody>
       </table>

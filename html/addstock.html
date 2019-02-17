@@ -11,44 +11,94 @@
 
 <body>
     <div id="app" style="padding:10px">
-    <div class="mdui-textfield" style="width:40%">
+
+      <div class="mdui-dialog" id="user-dialog">
+            <div class="mdui-dialog-content">
+            </div>
+
+              <div class="mdui-dialog-actions">
+                <button class="mdui-btn mdui-ripple" mdui-dialog-close>关闭</button>
+                <button class="mdui-btn mdui-ripple" v-on:click="interest(user.id)">删除</button> 
+            </div>
+         </div>
+        <div class="mdui-textfield" style="width:40%">
             <label class="mdui-textfield-label">股票代码，请输入如’600600‘</label>
-            <input class="mdui-textfield-input" type="number"  id="codeInput" />
+            <input class="mdui-textfield-input" type="number" id="codeInput" />
         </div>
         <div class="mdui-textfield" style="width:40%">
             <label class="mdui-textfield-label">股票名称，输入如’青岛啤酒‘</label>
-            <input class="mdui-textfield-input" type="text"  id="nameInput"/>
+            <input class="mdui-textfield-input" type="text" id="nameInput" />
         </div>
 
         <div class="mdui-textfield" style="width:40%">
-            <label class="mdui-textfield-label">今日涨停成交量，输入如’1000000‘</label>
-            <input class="mdui-textfield-input" type="number"  id="volInput"/>
+            <label class="mdui-textfield-label">今日涨停爆量，输入如’1000000‘</label>
+            <input class="mdui-textfield-input" type="number" id="volInput" />
         </div>
-                      
+ 
+        <div class="mdui-textfield" style="width:40%">
+            <label class="mdui-textfield-label">日期，输入如’2019-02-14‘</label>
+            <input class="mdui-textfield-input" type="text" id="dateInput" />
+        </div>
 
-         <div >
-                <button style="color:#fff;background:#ff4081" class="mdui-btn mdui-btn-raised mdui-ripple" v-on:click="add_stock">添加股票</button>
+        <div>
+            <button style="color:#fff;background:#ff4081" class="mdui-btn mdui-btn-raised mdui-ripple" v-on:click="add_stock">添加股票</button>
 
         </div>
 
-         <ol style="width:40%">
-        <li v-for="item in stocks_yes"> <span  class="mdui-list-item">{{item.name}},{{item.code}},成交量：{{item.vol_on_up}}<i style="margin-left:150px;float:right;" v-on:click="remove(item)" class="mdui-icon material-icons">&#xe872;</i></span>
+        <ol style="width:40%">
+            <li v-for="item in stocks_yes"> <span class="mdui-list-item">{{item.name}},{{item.code}},成交量：{{item.vol_on_up}}<i
+                        style="margin-left:150px;float:right;" v-on:click="remove(item)" class="mdui-icon material-icons">&#xe872;</i></span>
                 <div class="mdui-divider"></div>
 
-        </li> 
-      </ol>
+            </li>
+        </ol>
 
-         <div v-if="stocks_yes.length > 0"  >
-                <button   style="color:#fff;background:#ff4081" class="mdui-btn mdui-btn-raised mdui-ripple" v-on:click="commit_stock_list">提交股票数据</button>
+        <div v-if="stocks_yes.length > 0">
+            <button style="color:#fff;background:#ff4081" class="mdui-btn mdui-btn-raised mdui-ripple" v-on:click="commit_stock_list">提交股票数据</button>
 
         </div>
 
-</div>
-     <link rel="stylesheet" href="../css/mdui.min.css" />
+                      
+
+        <div style="margin-top:20px">
+          <div class="mdui-progress" v-if="isLoadTodayFinish == false">
+            <div class="mdui-progress-indeterminate"></div>
+        </div>
+  <div class="mdui-divider"></div>
+         <div style="margin-top:20px">股票数据（今日添加）</div>
+        <div v-if="stocks_today_add.length > 0" style="margin-top:20px" class="mdui-table-fluid">
+        
+       
+            <table class="mdui-table">
+                <thead>
+                    <tr>
+                        <th>股票代码</th>
+                        <th>股票名称</th>
+                        <th>涨停爆量</th>
+                        <th>创建日期</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in stocks_today_add">
+                        <td :style="{'color':item.color}">{{item.id}}</td>
+                        <td :style="{'color':item.color}">{{item.name}}</td>
+                        <td :style="{'color':item.color}">{{item.vol_on_up}}</td>
+                        <td :style="{'color':item.color}">{{item.create_time}}</td> 
+                         <td ><a href="##" style="cursor:pointer"  v-on:click="removeTodayStock(item)" class="mdui-icon material-icons">&#xe872;</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        </div>
+    </div>
+    <link rel="stylesheet" href="../css/mdui.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 
     <script src="../js/jq.js"></script>
     <script src="../js/mdui.js"></script>
     <script src="../js/add_stock.js"></script>
 </body>
+
 </html>
