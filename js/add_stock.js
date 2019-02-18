@@ -131,13 +131,37 @@ function getTimeStamp() {
     var myDate = new Date();
     var year = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
     var month = myDate.getMonth() + 1; //获取当前月份(1-12)
+    var day = myDate.getDate(); 
+    var hour = myDate.getHours();//获取小时
+    //如果当前小时为9点前，将日期设置为前一天，因为可能是在今天录入昨天的数据
+    if(hour<9){
+        day = day-1;
+    }
+    //纠正日期
+    if(day==0){
+        var tmp_month = month-1
+        if(tmp_month ==2 ){
+            day = 29
+        }else if(tmp_month==0||tmp_month==1||tmp_month==3||tmp_month==5||tmp_month==7||tmp_month==8||tmp_month==10||tmp_month==12){
+            day = 31
+        } 
+        else{
+            day =30
+        }
+        if(tmp_month==0){
+            month = 12
+            year = year-1
+        }else{
+            month = tmp_month
+        }
+    }
     if (month < 10) {
         month = '0' + month
     }
-    var day = myDate.getDate();
+   
+    console.log('hour = '+hour);
     if (day < 10) {
-        day = '0' + day
-
+        day = '0' + day 
     }
     var time_stamp = year + '-' + month + '-' + day;
 
