@@ -1,5 +1,5 @@
-// localStorage.stock_url = 'http://127.0.0.1:2000'
-localStorage.stock_url = 'http://212.64.93.216:2525'
+localStorage.stock_url = 'http://127.0.0.1:2000'
+// localStorage.stock_url = 'http://212.64.93.216:2525'
 var app = new Vue({
 
     el: "#app",
