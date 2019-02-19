@@ -165,10 +165,18 @@ function getTimeStamp() {
         day = '0' + day 
     }
     var time_stamp = year + '-' + month + '-' + day;
-    if(hour<9){
+    if(hour<2){
         app.date_hint = "夜深了，已将日期调整至昨天’"+time_stamp+"'"
 
-    }else{
+    }else if(hour<6){
+
+        app.date_hint = "凌晨了，已将日期调整至昨天’"+time_stamp+"'"
+
+    }else if(hour<9){
+        app.date_hint = "还没开盘，已将日期调整至昨天’"+time_stamp+"'"
+
+    }
+    else{
 
         app.date_hint = "日期，输入如’"+time_stamp+"'"
     }
