@@ -135,7 +135,7 @@ function getTimeStamp() {
     var day = myDate.getDate(); 
     var hour = myDate.getHours();//获取小时
     //如果当前小时为9点前，将日期设置为前一天，因为可能是在今天录入昨天的数据
-    if(hour<6){
+    if(hour<9){
         day = day-1;
     }
     //纠正日期
@@ -165,7 +165,7 @@ function getTimeStamp() {
         day = '0' + day 
     }
     var time_stamp = year + '-' + month + '-' + day;
-    if(hour<6){
+    if(hour<9){
         app.date_hint = "夜深了，已将日期调整至昨天’"+time_stamp+"'"
 
     }else{
