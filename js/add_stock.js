@@ -175,6 +175,8 @@ function getTimeStamp() {
     }else if(hour<9){
         app.date_hint = "还没开盘，已将日期调整至昨天’"+time_stamp+"'"
 
+    }else if(hour<=19){
+        app.date_hint = "已收盘，日期调整至昨天’"+time_stamp+"'"
     }
     else{
 
