@@ -166,18 +166,16 @@ function getTimeStamp() {
         day = '0' + day 
     }
     var time_stamp = year + '-' + month + '-' + day;
-    if(hour<2){
+    if(hour<6){
         app.date_hint = "夜深了，已将日期调整至昨天’"+time_stamp+"'"
-
-    }else if(hour<6){
-
-        app.date_hint = "凌晨了，已将日期调整至昨天’"+time_stamp+"'"
 
     }else if(hour<9){
         app.date_hint = "还没开盘，已将日期调整至昨天’"+time_stamp+"'"
 
     }else if(hour<=15){
         app.date_hint = "未收盘，日期调整至昨天’"+time_stamp+"'"
+    }else if(hour>=22){
+        app.date_hint = "夜深了，请注意休息，输入如’"+time_stamp+"'"
     }
     else{
 
