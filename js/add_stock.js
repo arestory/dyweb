@@ -134,15 +134,16 @@ function getTimeStamp() {
     var month = myDate.getMonth() + 1; //获取当前月份(1-12)
     var day = myDate.getDate(); 
     var hour = myDate.getHours();//获取小时
-    //如果当前小时为9点前，将日期设置为前一天，因为可能是在今天录入昨天的数据
-    if(hour<9){
+    //如果当前小时为15点前，将日期设置为前一天，因为可能是在今天录入昨天的数据
+    if(hour<15){
         day = day-1;
     }
     //纠正日期
     if(day==0){
         var tmp_month = month-1
         if(tmp_month ==2 ){
-            day = 29
+            
+            day = 28
         }else if(tmp_month==0||tmp_month==1||tmp_month==3||tmp_month==5||tmp_month==7||tmp_month==8||tmp_month==10||tmp_month==12){
             day = 31
         } 
@@ -175,8 +176,8 @@ function getTimeStamp() {
     }else if(hour<9){
         app.date_hint = "还没开盘，已将日期调整至昨天’"+time_stamp+"'"
 
-    }else if(hour<=19){
-        app.date_hint = "已收盘，日期调整至昨天’"+time_stamp+"'"
+    }else if(hour<=15){
+        app.date_hint = "未收盘，日期调整至昨天’"+time_stamp+"'"
     }
     else{
 
