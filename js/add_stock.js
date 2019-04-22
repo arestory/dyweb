@@ -1,5 +1,5 @@
 // localStorage.stock_url = 'http://127.0.0.1:2000'
-localStorage.stock_url = 'http://212.64.93.216:2525'
+localStorage.stock_url = 'http://localhost:9595'
 var app = new Vue({
 
     el: "#app",
@@ -23,7 +23,7 @@ var app = new Vue({
                 for (var i = 0; i < app.stocks_yes.length; i++) {
 
                     var item = app.stocks_yes[i]
-                    if (name == item['name'] || code == item['code']) {
+                    if (name == item['name'] || code == item['id']) {
                         alert('已存在股票：' + name)
                         return
                     }
@@ -35,7 +35,8 @@ var app = new Vue({
                 app.stocks_yes = app.stocks_yes.concat({
                     'name': name,
                     'vol_on_up': volInput,
-                    'code': code
+                    'id': code,
+                    'createTime':time
                 })
 
             }
@@ -43,16 +44,18 @@ var app = new Vue({
         },
         removeTodayStock: function (item) {
 
+            console.log(item);
             var url = localStorage.stock_url + '/deleteTodayAddStock'
             $.ajax(url, {
-                    method: "POST",
-                    dataType: 'jsonp',
-                    jsonp: "jsonpCallback",
+                    method: "GET",
+                    // dataType: 'jsonp',
+                    // jsonp: "jsonpCallback",
+                    // headers: {
+                    //     'Access-Control-Allow-Origin': '*',
+                    //     'Access-Control-Allow-Headers': 'x-requested-with,content-type',
+                    // },
+
                     contentType: "application/json;charset=utf-8",
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Headers': 'x-requested-with,content-type',
-                    },
                     data: {
 
                         id: item['id']
@@ -87,23 +90,26 @@ var app = new Vue({
             if (time.length < 10) {
                 time = getTimeStamp();
                 document.getElementById('dateInput').value =time
-                    
             }
+            var jsonData = {
+
+                createTime: time,
+                list:app.stocks_yes
+            };
+            jsonData = JSON.stringify(jsonData)
+            console.log(time);
             var url = localStorage.stock_url + '/add_stock_list'
             $.ajax(url, {
                     method: "POST",
-                    dataType: 'jsonp',
-                    jsonp: "jsonpCallback",
-                    contentType: "application/json;charset=utf-8",
-                    data: app.stocks_yes,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Headers': 'x-requested-with,content-type',
-                    },
-                    data: {
-                        create_time: time,
-                        list: JSON.stringify(app.stocks_yes)
-                    },
+                    contentType: "application/json;charset=utf-8", 
+                    // dataType: 'jsonp',
+                    // jsonp: "jsonpCallback",
+                    // headers: {
+                    //     'Access-Control-Allow-Origin': '*',
+                    //     'Access-Control-Allow-Headers': 'x-requested-with,content-type',
+                    // },
+                    dataType: "json",
+                    data:jsonData,
                     success: function (data) {
 
                         alert('提交成功')
@@ -166,9 +172,9 @@ function getTimeStamp() {
         day = '0' + day 
     }
     var time_stamp = year + '-' + month + '-' + day;
+    
     if(hour<6){
         app.date_hint = "夜深了，已将日期调整至昨天’"+time_stamp+"'"
-
     }else if(hour<9){
         app.date_hint = "还没开盘，已将日期调整至昨天’"+time_stamp+"'"
 
@@ -178,7 +184,6 @@ function getTimeStamp() {
         app.date_hint = "夜深了，请注意休息，输入如’"+time_stamp+"'"
     }
     else{
-
         app.date_hint = "日期，输入如’"+time_stamp+"'"
     }
     return time_stamp;
@@ -222,18 +227,17 @@ function query_today_add_stock() {
 
     var url = localStorage.stock_url + '/queryTodayStocks'
     $.ajax(url, {
-            method: "POST",
-            dataType: 'jsonp',
-            jsonp: "jsonpCallback",
+            method: "GET",
             contentType: "application/json;charset=utf-8",
             data: app.stocks_yes,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'x-requested-with,content-type',
-            },
+            // dataType: 'jsonp',
+            // jsonp: "jsonpCallback",
+            // headers: {
+            //     'Access-Control-Allow-Origin': '*',
+            //     'Access-Control-Allow-Headers': 'x-requested-with,content-type',
+            // },
             data: {
-                date:getTimeStamp(),
-                list: JSON.stringify(app.stocks_yes)
+                date:getTimeStamp()
             },
             success: function (data) {
 

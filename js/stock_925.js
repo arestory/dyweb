@@ -1,5 +1,5 @@
 if (!localStorage.stock_url) {
-    localStorage.stock_url = 'http://212.64.93.216:2525'
+    localStorage.stock_url = 'http://localhost:9595'
 }
 var app = new Vue({
 
@@ -33,22 +33,28 @@ var app = new Vue({
     }
 })
  
+function showData(data){
+
+    console.log(data)
+}
 
 function query925stocks() {
 
-
+ 
     var url = localStorage.stock_url + '/query925stocks'
     $.ajax(url, {
             method: "GET",
-            dataType: 'jsonp',
-            jsonp: "jsonpCallback",
-            contentType: "application/json;charset=utf-8",
             data: app.stocks_yes,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'x-requested-with,content-type',
-            },
+            contentType: "application/json;charset=utf-8",
+            // dataType: 'jsonp',
+            // jsonp: "jsonpCallback",
+            // headers: {
+            //     'Access-Control-Allow-Origin': '*',
+            //     'Access-Control-Allow-Headers': 'x-requested-with,content-type',
+            // },
+            // jsonpCallback:"showData",
             success: function (data) {
+                console.log(data);
                 if (data.length == 0) {
                     alert('没有9.25的数据')
                 } else {
@@ -70,8 +76,9 @@ function query925stocks() {
 
                         return a['percent']-b['percent']
                     }) 
-                }
+
                 console.log(newData)
+                }
             },
             error: function (e) {
 
