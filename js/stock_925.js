@@ -1,5 +1,7 @@
+localStorage.stock_url = 'http://212.64.93.216:2525'
+
 if (!localStorage.stock_url) {
-    localStorage.stock_url = 'http://212.64.93.216:8585'
+    localStorage.stock_url = 'http://212.64.93.216:2525'
 }
 var app = new Vue({
 
